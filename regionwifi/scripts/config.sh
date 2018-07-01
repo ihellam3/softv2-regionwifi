@@ -14,7 +14,7 @@ on_post() {
     fi
 
     #NA,WW,GR,PR,RU,BZ,IN,KO,JP,AU,CA
-    artmtd -w region $region
+    artmtd -w region $region >/dev/null
     echo '{"status":"ok"}'
 }
 

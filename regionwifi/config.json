@@ -1,7 +1,7 @@
 {
     "name":"regionwifi",
     "displayName":"WIFI改区",
-    "version":"0.0.2",
+    "version":"0.0.3",
     "tags":"工具",
     "description": "对 Orbi 的 WIFI 进行改区",
     "event_scripts":[],
