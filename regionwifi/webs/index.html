@@ -54,6 +54,7 @@
                type: "select",
                label: "region",
                model: "region",
+               required: true,
                values: ["NA","WW","GR","PR","RU","BZ","IN","KO","JP","AU","CA"]
             }, {
               type: "label",
@@ -70,7 +71,9 @@
                   };
 
                   axios.post('/cgi-bin/luci/apps/regionwifi', postData).then(function(result) {
-                        self.handleData(result.data, true);
+                      if(result.data.status == "ok") {
+                          alert("配置成功，但是要重启才生效");
+                      }
                   });
 
                 }
@@ -90,8 +93,14 @@
       },
       methods: {
         handleData: function (data, is_post) {
-          data.region = data.region || '';
-          data.info = "配置变动，手动重启才生效";
+          var region = data.region || '';
+          data.info = "配置变动，手动重启才生效，建议选择 NA 区域";
+          var ss = region.split(":");
+          if (ss.length == 3) {
+              data.region = ss[2].trim();
+          } else {
+              data.region = "";
+          }
           if (is_post) {
             this.model.region = data.enabled;
           } else {

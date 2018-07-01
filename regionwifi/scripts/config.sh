@@ -9,9 +9,12 @@ on_post() {
     json_load "$INPUT_JSON"
     json_get_var region "region"
 
+    if [ "$region"x == x ]; then
+        echo '{"status":"error"}'
+    fi
+
     #NA,WW,GR,PR,RU,BZ,IN,KO,JP,AU,CA
     artmtd -w region $region
-
     echo '{"status":"ok"}'
 }
 
