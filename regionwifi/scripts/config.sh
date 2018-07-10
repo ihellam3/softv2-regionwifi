@@ -5,12 +5,24 @@
 
 on_post() {
     local region
+    local wifi5g
+    local ssid5g
 
     json_load "$INPUT_JSON"
     json_get_var region "region"
+    json_get_var wifi5g "wifi5g"
+    json_get_var ssid5g "ssid5g"
 
     if [ "$region"x == x ]; then
         echo '{"status":"error"}'
+    fi
+    if [ "$wifi5g" == "enabled" ]; then
+        config set wla_ssid=$ssid5g
+        config commit
+    elif [ "$wifi5g" == "disabled" ]; then
+        old=`config get wl_ssid`
+        config set wla_ssid=$old
+        config commit
     fi
 
     #NA,WW,GR,PR,RU,BZ,IN,KO,JP,AU,CA
@@ -20,7 +32,8 @@ on_post() {
 
 on_get() {
     region=`artmtd -r region`
-    echo '{"region":"'$region'"}'
+    ssid5g=`config get wla_ssid`
+    echo '{"region":"'$region'","ssid5g":"'$ssid5g'"}'
 }
 
 case $ACTION in

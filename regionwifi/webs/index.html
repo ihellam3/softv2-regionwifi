@@ -60,14 +60,12 @@
                type: "select",
                label: "独立 5G 信号",
                model: "wifi5g",
-               required: true,
                values: function() {
                    return [
-                       {"id":"disabled", "name":"禁用"},
-                       {"id":"enabled", "name":"开启"}
+                       {"id":"disabled", "name":"关闭"},
+                       {"id":"enabled", "name":"打开"}
                    ]
                },
-               default: "disabled"
             }, {
                 type: "input",
                 inputType: "text",
