@@ -48,14 +48,33 @@
       data: function () {
         var self = this
         return {
-          model: {"region":"", "info":"配置变动，手动重启才生效"},
+          model: {"region":"", "info":"配置变动，手动重启才生效", "wifi5g":"disabled", "ssid5g":""},
           schema: {
             fields: [{
                type: "select",
-               label: "region",
+               label: "区域",
                model: "region",
                required: true,
                values: ["NA","WW","GR","PR","RU","BZ","IN","KO","JP","AU","CA"]
+            }, {
+               type: "select",
+               label: "独立 5G 信号",
+               model: "wifi5g",
+               required: true,
+               values: function() {
+                   return [
+                       {"id":"disabled", "name":"禁用"},
+                       {"id":"enabled", "name":"开启"}
+                   ]
+               },
+               default: "disabled"
+            }, {
+                type: "input",
+                inputType: "text",
+                label: "SSID 5G",
+                model: "ssid5g",
+                maxlength: 50,
+                placeholder: "填入 SSID"
             }, {
               type: "label",
               label: "说明",
@@ -68,6 +87,8 @@
               onSubmit: function(mod, sch) {
                   var postData = {
                      region: mod.region,
+                     wifi5g: mod.wifi5g,
+                     ssid5g: mod.ssid5g
                   };
 
                   axios.post('/cgi-bin/luci/apps/regionwifi', postData).then(function(result) {
