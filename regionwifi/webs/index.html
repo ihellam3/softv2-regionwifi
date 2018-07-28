@@ -9,11 +9,11 @@
   <script type="text/javascript" src="https://unpkg.com/vue@2.2.1/dist/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/vue-form-generator@2.1.1"></script>
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/vue-form-generator@2.1.0/dist/vfg.css">
-  <title>WIFI改区</title>
+  <title>WIFI助手</title>
 </head>
 
 <body>
-  <h1 class="text-center">WIFI改区</h1>
+  <h1 class="text-center">WIFI助手</h1>
   <div class="container" id="app">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -55,7 +55,10 @@
                label: "区域",
                model: "region",
                required: true,
-               values: ["NA","WW","GR","PR","RU","BZ","IN","KO","JP","AU","CA"]
+               values: ["NA","WW","GR","PR","RU","BZ","IN","KO","JP","AU","CA"],
+               selectOptions: {
+                   hideNoneSelectedText: true
+               }
             }, {
                type: "select",
                label: "独立 5G 信号",
@@ -66,6 +69,9 @@
                        {"id":"enabled", "name":"打开"}
                    ]
                },
+               selectOptions: {
+                   noneSelectedText: "未选择"
+               }
             }, {
                 type: "input",
                 inputType: "text",
