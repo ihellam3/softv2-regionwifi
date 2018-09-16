@@ -33,6 +33,11 @@ on_post() {
 on_get() {
     region=`artmtd -r region`
     ssid5g=`config get wla_ssid`
+    ssid2g=`config get wl_ssid`
+    if [ "$ssid5G" = "ssid2g" ]; then
+        s5g=5G
+        ssid5g=$ssid2g$s5g
+    fi
     echo '{"region":"'$region'","ssid5g":"'$ssid5g'"}'
 }
 
